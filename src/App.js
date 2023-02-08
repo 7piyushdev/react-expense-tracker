@@ -1,6 +1,6 @@
 import React from "react";
-
 import Expenses from "./components/Expenses/Expenses";
+import ExpenseForm from "./components/Expenses/NewExpense/ExpenseForm";
 
 const App = () => {
   const expenses = [
@@ -11,8 +11,14 @@ const App = () => {
       date: new Date(2020, 7, 14),
       LocationOfExpenditure: "Amrawati",
     },
-    { id: "e2", title: "New TV", amount: 799.49, date: new Date(2021, 2, 12), LocationOfExpenditure: "Haryana" },
-    
+    {
+      id: "e2",
+      title: "New TV",
+      amount: 799.49,
+      date: new Date(2021, 2, 12),
+      LocationOfExpenditure: "Haryana",
+    },
+
     {
       id: "e3",
       title: "Car Insurance",
@@ -31,7 +37,9 @@ const App = () => {
   return (
     <div>
       <h2>Let's get started!</h2>
+      <ExpenseForm />
       <Expenses items={expenses} />
+      
     </div>
   );
 };
