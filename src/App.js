@@ -34,7 +34,9 @@ const expenses = [
 const App = () => {
   const [newExpense, setNewExpense] = useState(expenses);
   const addExpenseHandler = (expense) => {
-    setNewExpense([...newExpense, expense]);
+    setNewExpense((previous) => {
+      return [expense, ...previous];
+    });
   };
   return (
     <Card>
