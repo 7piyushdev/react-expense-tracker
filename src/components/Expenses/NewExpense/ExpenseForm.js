@@ -1,67 +1,67 @@
-import React, { useState } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import React, { useState } from "react";
+import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
-    const [formData, setFormData] = useState({
-        title: '',
-        amount: '',
-        date: '',
-    });
+const ExpenseForm = (props) => {
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
 
-    const handleInputChange = (e) => {
-        setFormData((prevState) => {
-            return { ...prevState,
-            [e.target.name]: e.target.value }
-        });
+  const titleChangeHandler = (event) => {
+    setEnteredTitle(event.target.value);
+  };
+
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+  };
+
+  const dateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form Data:', formData);
-    };
+    props.onSaveExpenseData(expenseData);
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
+  };
 
-    return (
-        <>
-            <div className='container card'>
-                <Form onSubmit={handleSubmit}>
-                    <FormGroup>
-                        <Label for="title">Expense title</Label>
-                        <Input
-                            type="text"
-                            name="title"
-                            id="title"
-                            placeholder="Enter your title"
-                            value={formData.title}
-                            onChange={handleInputChange}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="amount">Expense Amount</Label>
-                        <Input
-                            type="number"
-                            name="amount"
-                            id="amount"
-                            placeholder="Enter your amount"
-                            value={formData.amount}
-                            onChange={handleInputChange}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="date">Date</Label>
-                        <Input
-                            type="date"
-                            name="date"
-                            id="date"
-                            placeholder="Enter your date"
-                            value={formData.date}
-                            onChange={handleInputChange}
-                        />
-                    </FormGroup>
-                    <Button type="submit">Submit</Button>
-                </Form>
-            </div>
-        </>
-    )
-}
+  return (
+    <form onSubmit={submitHandler}>
+      <div className="new-expense__controls">
+        <div className="new-expense__control">
+          <label>Title</label>
+          <input
+            type="text"
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+          />
+        </div>
+        <div className="new-expense__control">
+          <label>Amount</label>
+          <input
+            type="number"
+            value={enteredAmount}
+            onChange={amountChangeHandler}
+          />
+        </div>
+        <div className="new-expense__control">
+          <label>Date</label>
+          <input type="date" value={enteredDate} onChange={dateChangeHandler} />
+        </div>
+      </div>
+      <div className="new-expense__actions">
+        <button type="submit">Add Expense</button>
+      </div>
+    </form>
+  );
+};
 
-export default ExpenseForm
+export default ExpenseForm;

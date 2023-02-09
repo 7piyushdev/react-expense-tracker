@@ -5,16 +5,19 @@ import "./ExpenseItem.css";
 import ExpenseDetails from "./ExpenseDetails";
 
 const ExpenseItem = (props) => {
-  
-  const [amount, setAmount] = useState(props.amount)
+  const [amount, setAmount] = useState(props.amount);
   const clickHandler = () => {
-     setAmount(`${100}`)
-  }
+    setAmount(`${100}`);
+  };
 
   return (
     <Card className="expense-item">
       <ExpenseDate date={props.date} />
-      <ExpenseDetails title = {props.title} amount = {amount} LocationOfExpenditure = {props.LocationOfExpenditure}  />
+      <ExpenseDetails
+        title={props.title}
+        amount={amount}
+        LocationOfExpenditure={props.LocationOfExpenditure}
+      />
       <button onClick={clickHandler}>Update Amount</button>
     </Card>
   );
